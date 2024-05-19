@@ -1,6 +1,6 @@
 # Exercise Badges
 
-![](https://byob.yarr.is/prinsSayja01/MADE-PROJECT/score_ex1) ![](https://byob.yarr.is/PrinsSayja01/MADE-PROJECT/score_ex2) ![](https://byob.yarr.is/PrinsSayja01/MADE-PROJECT/score_ex3) ![](https://byob.yarr.is/PrinsSayja01/MADE-PROJECT/score_ex4) ![](https://byob.yarr.is/PrinsSayja01/MADE-PROJECT/score_ex5)
+![](https://byob.yarr.is/PrinsSayja01/MADE-PROJECT/score_ex1) ![](https://byob.yarr.is/PrinsSayja01/MADE-PROJECT/score_ex2) ![](https://byob.yarr.is/PrinsSayja01/MADE-PROJECT/score_ex3) ![](https://byob.yarr.is/PrinsSayja01/MADE-PROJECT/score_ex4) ![](https://byob.yarr.is/PrinsSayja01/MADE-PROJECT/score_ex5)
 
 # Methods of Advanced Data Engineering Template Project
 
