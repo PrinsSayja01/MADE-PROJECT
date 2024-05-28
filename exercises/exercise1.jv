@@ -11,6 +11,7 @@ pipeline AirportPipeline {
 
     block AirportCSVInterpreter oftype CSVInterpreter { enclosing: '"'; }
 
+
     block AirportTableInterpreter oftype TableInterpreter {
         header: true;
         columns: [
