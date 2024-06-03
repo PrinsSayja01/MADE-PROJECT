@@ -1,0 +1,86 @@
+
+
+pipeline GoodsTransportedByTrainGermanyPipeline {
+    GoodsCSVExtractor 
+        -> GoodsTextFileInterpreter
+        -> GoodsCSVInterpreter 
+        -> GoodsHeaderWriter1
+        -> GoodsHeaderWriter2 
+        -> GoodsTableInterpreter 
+        -> GoodsSQLiteLoader;
+
+    block GoodsCSVExtractor oftype HttpExtractor {
+        url: "https://www-genesis.destatis.de/genesis/downloads/00/tables/46131-0014_00.csv";
+        retries: 3;
+    }
+
+    
+    block GoodsTextFileInterpreter oftype TextFileInterpreter {
+        encoding: "latin3";
+    }
+
+    block GoodsCSVInterpreter oftype CSVInterpreter { 
+        delimiter: ";";
+        enclosing: '';
+    }
+
+   
+    block GoodsHeaderWriter1 oftype CellWriter {
+        at: range A1:E1;
+        write: ["year", "month", "goods_id", "goods_name", "goods_source"];
+    }
+
+    block GoodsHeaderWriter2 oftype CellWriter {
+        at: range AT1:AU1;
+        write: ["abroad", "total"];
+    }
+
+   
+    block GoodsTableInterpreter oftype TableInterpreter {
+        header: true;
+        columns: [
+            "year" oftype PositiveIntegerType, 
+            "month" oftype GermanMonthType, 
+            "goods_id" oftype GoodsIdType, 
+            "goods_name" oftype text, 
+            "goods_source" oftype text, 
+            "abroad" oftype PositiveIntegerType, 
+            "total" oftype PositiveIntegerType
+        ];
+    }
+  
+    block GoodsSQLiteLoader oftype SQLiteLoader {
+        table: "goods";
+        file: "./goodsTransportedByTrain.sqlite";
+    }
+}
+
+
+valuetype GermanMonthType oftype text {
+    constraints: [GermanMonthConstraint];
+}
+
+constraint GermanMonthConstraint  oftype RegexConstraint {
+    regex: /\b(Januar|Februar|März|April|Mai|Juni|Juli|August|September|Oktober|November|Dezember)\b/;
+}
+
+
+
+valuetype GoodsIdType oftype text {
+    constraints: [GoodsIdPatternConstraint];
+}
+
+constraint GoodsIdPatternConstraint oftype RegexConstraint {
+    regex: /^NST7-[0-9A-Z]{3}$/;
+}
+
+
+
+valuetype PositiveIntegerType oftype integer {
+    constraints: [PositiveIntegerConstraint];
+}
+
+constraint PositiveIntegerConstraint oftype RangeConstraint {
+    lowerBound: 0;
+    lowerBoundInclusive: true;
+}
