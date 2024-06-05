@@ -118,7 +118,7 @@ class Pipeline():
 def main():
     # Annual Surface Temperature Change Data Source
     p1 = Pipeline()
-    p1.url = "https://github.com/PrinsSayja01/MADE-PROJECT/blob/main/project/Temperature-Change.csv"
+    p1.url = "https://github.com/PrinsSayja01/MADE-PROJECT/blob/main/project/Temperature-Changes.csv"
     p1.dropColumns = ["ObjectId", "Indicator", "Source", "CTS_Code", "CTS_Name", "CTS_Full_Descriptor"]
     renameColumns1 = {"variable":"Year", "value":"Temperature"}
     p1.csvFetch()
@@ -129,7 +129,7 @@ def main():
 
     # Climate-related Disasters Frequency Data Source
     p2 = Pipeline()
-    p2.url = "https://github.com/PrinsSayja01/MADE-PROJECT/blob/main/project/DisastersFrequency.csv"
+    p2.url = "https://github.com/PrinsSayja01/MADE-PROJECT/blob/main/project/Disasters-Frequency.csv"
     p2.dropColumns = ["ObjectId", "Source", "CTS_Code", "CTS_Name", "CTS_Full_Descriptor"]
     renameColumns2 = {"variable":"Year", "value":"Incident"}
     p2.csvFetch()
